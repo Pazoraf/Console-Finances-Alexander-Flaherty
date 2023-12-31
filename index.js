@@ -86,6 +86,12 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+var flatFinance = finances.flat()
+var financeTotal = 0
+for (i=0; i<flatFinance.length; i++) {
+  if (typeof flatFinance[i] === "number"){
+    financeTotal+=flatFinance[i];
+  }
+}
 
-
-console.log("Financial Analysis".concat('\n',"------------------", '\n', "Total Months: " + finances.length))
+console.log("Financial Analysis".concat('\n',"------------------", '\n', "Total Months: " + finances.length, '\n', "Total: $" + financeTotal))
