@@ -86,12 +86,35 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
-var flatFinance = finances.flat()
-var financeTotal = 0
-for (i=0; i<flatFinance.length; i++) {
-  if (typeof flatFinance[i] === "number"){
-    financeTotal+=flatFinance[i];
+// For loop to iterate over nested array to total all profits in the array.
+financesTotal=0
+for (i=0; i<finances.length; i++){
+  if (Array.isArray(finances[i])){
+    for (j=0; j<finances[i].length; j++){
+      if (typeof finances[i][j] === 'number'){
+        financesTotal+=finances[i][j];
+      }
+    }
+  } else if (typeof finances[i] === 'number'){
+    financesTotal += finances[i];
   }
 }
 
-console.log("Financial Analysis".concat('\n',"------------------", '\n', "Total Months: " + finances.length, '\n', "Total: $" + financeTotal))
+// For loop to iterate over nested array and find the total change per array.
+var totalDifference = 0;
+for (i = 0; i < finances.length - 1; i++) {
+  var currentArray = finances[i];
+  var nextArray = finances[i + 1];
+  var currentNumber = currentArray[1];
+  var nextNumber = nextArray[1];
+  if (typeof currentNumber === "number" && typeof nextNumber === "number") {
+    var difference = nextNumber - currentNumber;
+    totalDifference += difference;
+  }
+}
+// Average of the total change in profits per month, rounded to two decimal places
+var averageChange = Math.round((totalDifference/(finances.length-1))*100)/100;
+
+
+
+console.log("Financial Analysis".concat('\n',"------------------", '\n', "Total Months: " + finances.length, '\n', "Total: $" + financesTotal,  '\n', "Average Change: "+averageChange,))
