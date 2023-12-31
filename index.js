@@ -86,12 +86,21 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
-var flatFinance = finances.flat()
-var financeTotal = 0
-for (i=0; i<flatFinance.length; i++) {
-  if (typeof flatFinance[i] === "number"){
-    financeTotal+=flatFinance[i];
+// For loop to iterate over nested array to total all profits in the array.
+financesTotal=0
+for (i=0; i<finances.length; i++){
+  if (Array.isArray(finances[i])){
+    for (j=0; j<finances[i].length; j++){
+      if (typeof finances[i][j] === 'number'){
+        financesTotal+=finances[i][j];
+      }
+    }
+  } else if (typeof finances[i] === 'number'){
+    financesTotal += finances[i];
   }
 }
 
-console.log("Financial Analysis".concat('\n',"------------------", '\n', "Total Months: " + finances.length, '\n', "Total: $" + financeTotal))
+
+
+
+console.log("Financial Analysis".concat('\n',"------------------", '\n', "Total Months: " + finances.length, '\n', "Total: $" + financesTotal,  '\n', ))
