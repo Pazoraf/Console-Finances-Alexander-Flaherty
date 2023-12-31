@@ -100,7 +100,21 @@ for (i=0; i<finances.length; i++){
   }
 }
 
+// For loop to iterate over nested array and find the total change per array.
+var totalDifference = 0;
+for (i = 0; i < finances.length - 1; i++) {
+  var currentArray = finances[i];
+  var nextArray = finances[i + 1];
+  var currentNumber = currentArray[1];
+  var nextNumber = nextArray[1];
+  if (typeof currentNumber === "number" && typeof nextNumber === "number") {
+    var difference = nextNumber - currentNumber;
+    totalDifference += difference;
+  }
+}
+// Average of the total change in profits per month, rounded to two decimal places
+var averageChange = Math.round((totalDifference/(finances.length-1))*100)/100;
 
 
 
-console.log("Financial Analysis".concat('\n',"------------------", '\n', "Total Months: " + finances.length, '\n', "Total: $" + financesTotal,  '\n', ))
+console.log("Financial Analysis".concat('\n',"------------------", '\n', "Total Months: " + finances.length, '\n', "Total: $" + financesTotal,  '\n', "Average Change: "+averageChange,))
