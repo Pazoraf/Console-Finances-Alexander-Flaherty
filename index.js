@@ -115,21 +115,20 @@ for (i = 0; i < finances.length - 1; i++) {
 // Average of the total change in profits per month, rounded to two decimal places
 var averageChange = Math.round((totalDifference/(finances.length-1))*100)/100;
 
-// Finding the array that contains the highest and lowest profits.
-var highestValue = 0;
-var highestArray;
-
-for (let i = 0; i < finances.length; i++) {
- var currentArray = finances[i];
- var numericValue = currentArray[1];
-
-  if (numericValue > highestValue) {
-    highestValue = numericValue;
-    highestArray = currentArray;
+// Finding the array that contains the highest and lowest profit increase.
+var greatestIncrease =0;
+var previousValue = finances[0][1];
+var greatestIncreaseString='';
+for (i=1; i<finances.length; i++){
+  var currentValue= finances[i][1];
+  var increase= currentValue - previousValue;
+  if (increase>greatestIncrease) {
+    greatestIncrease = increase;
+    greatestIncreaseString = finances[i][0];
   }
+  previousValue=currentValue;
 }
 
 
 
-
-console.log("Financial Analysis".concat("\n------------------", "\nTotal Months: " + finances.length, "\nTotal: $" + financesTotal,  "\nAverage Change: "+averageChange, "\nGreatest Increase in Profits/Losses: "+highestArray, "\nGreatest Decrease in Profits/Losses: "))
+console.log("Financial Analysis".concat("\n------------------", `\nTotal Months: ${finances.length}`, `\nTotal: $${financesTotal}`,  `\nAverage Change: ${averageChange}`, `\nGreatest Increase in Profits/Losses: ${greatestIncreaseString} $${greatestIncrease}`));
