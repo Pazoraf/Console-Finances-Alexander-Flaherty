@@ -86,7 +86,7 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
-// For loop to iterate over nested array to total all profits in the array.
+// Nested for loop to iterate over nested array to total all profits in the array.
 financesTotal=0
 for (i=0; i<finances.length; i++){
   if (Array.isArray(finances[i])){
@@ -112,10 +112,11 @@ for (i = 0; i < finances.length - 1; i++) {
     totalDifference += difference;
   }
 }
-// Average of the total change in profits per month, rounded to two decimal places
+// Average of the total change in profits per month, rounded to two decimal places.
 var averageChange = Math.round((totalDifference/(finances.length-1))*100)/100;
 
 // Finding the array that contains the highest and lowest profit increase.
+// For loop to find the greatest profit increase.
 var greatestIncrease =0;
 var previousValue = finances[0][1];
 var greatestIncreaseString='';
@@ -128,7 +129,28 @@ for (i=1; i<finances.length; i++){
   }
   previousValue=currentValue;
 }
+//For loop to find the greatest profit decrease.
+var greatestDecrease =0;
+var greatestDecreaseString='';
+previousValue= finances[0][1];
+for (i=1; i<finances.length; i++){
+  var currentValue=finances[i][1];
+  var decrease=previousValue-currentValue;
+  if (decrease>greatestDecrease){
+    greatestDecrease= decrease;
+    greatestDecreaseString=finances[i][0];
+  }
+  previousValue=currentValue
+}
+//Converted greatestDecrease to a negative value.
+greatestDecrease= -Math.abs(greatestDecrease)
 
-
-
-console.log("Financial Analysis".concat("\n------------------", `\nTotal Months: ${finances.length}`, `\nTotal: $${financesTotal}`,  `\nAverage Change: ${averageChange}`, `\nGreatest Increase in Profits/Losses: ${greatestIncreaseString} $${greatestIncrease}`));
+console.log(`Financial Analysis
+------------------
+Total Months: ${finances.length}
+Total: $${financesTotal}
+Average Change: ${averageChange}
+Greatest Increase in Profits/Losses: 
+${greatestIncreaseString} ($${greatestIncrease})
+Greatest Decrease in Profits/Losses: 
+${greatestDecreaseString} ($${greatestDecrease})`);
