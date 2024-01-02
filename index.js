@@ -115,6 +115,21 @@ for (i = 0; i < finances.length - 1; i++) {
 // Average of the total change in profits per month, rounded to two decimal places
 var averageChange = Math.round((totalDifference/(finances.length-1))*100)/100;
 
+// Finding the array that contains the highest and lowest profits.
+var highestValue = 0;
+var highestArray;
+
+for (let i = 0; i < finances.length; i++) {
+ var currentArray = finances[i];
+ var numericValue = currentArray[1];
+
+  if (numericValue > highestValue) {
+    highestValue = numericValue;
+    highestArray = currentArray;
+  }
+}
 
 
-console.log("Financial Analysis".concat('\n',"------------------", '\n', "Total Months: " + finances.length, '\n', "Total: $" + financesTotal,  '\n', "Average Change: "+averageChange,))
+
+
+console.log("Financial Analysis".concat("\n------------------", "\nTotal Months: " + finances.length, "\nTotal: $" + financesTotal,  "\nAverage Change: "+averageChange, "\nGreatest Increase in Profits/Losses: "+highestArray, "\nGreatest Decrease in Profits/Losses: "))
